@@ -5,14 +5,28 @@ import { Menu, X } from 'lucide-react'
 import Link from 'next/link'
 import Image from 'next/image'
 
+declare const gtag_report_conversion: (url: string) => void;
+
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false)
+
+  const handleCallClick = (e: React.MouseEvent<HTMLAnchorElement>, phoneNumber: string) => {
+    e.preventDefault();
+    if (typeof gtag_report_conversion === 'function') {
+      gtag_report_conversion(`tel:${phoneNumber}`);
+    }
+    window.location.href = `tel:${phoneNumber}`;
+  };
 
   const navLinks = [
     { name: 'الرئيسية', href: '/' },
     { name: 'خدمات النقل', href: '#services' },
     { name: 'عن الشركة', href: '#about' },
-    { name: 'تواصل معنا', href: 'tel:0565265233' }
+    { 
+      name: 'تواصل معنا', 
+      href: 'tel:0543757997',
+      isPhone: true 
+    }
   ]
 
   return (
@@ -36,13 +50,25 @@ const Navbar = () => {
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-4">
             {navLinks.map((link) => (
-              <Link
-                key={link.name}
-                href={link.href}
-                className="px-4 py-2 rounded-full text-sm font-medium hover:bg-purple-600 transition-all duration-300 hover:shadow-lg"
-              >
-                {link.name}
-              </Link>
+              link.isPhone ? (
+                <a
+                  key={link.name}
+                  href={link.href}
+                  onClick={(e) => handleCallClick(e, '0543757997')}
+                  className="px-4 py-2 rounded-full text-sm font-medium hover:bg-purple-600 transition-all duration-300 hover:shadow-lg"
+                  aria-label="اتصل بنا الآن للحصول على خدمة نقل عفش محترفة"
+                >
+                  {link.name}
+                </a>
+              ) : (
+                <Link
+                  key={link.name}
+                  href={link.href}
+                  className="px-4 py-2 rounded-full text-sm font-medium hover:bg-purple-600 transition-all duration-300 hover:shadow-lg"
+                >
+                  {link.name}
+                </Link>
+              )
             ))}
           </div>
 
@@ -63,14 +89,29 @@ const Navbar = () => {
         <div className="md:hidden absolute w-full bg-purple-700 shadow-xl">
           <div className="px-2 pt-2 pb-3 space-y-1">
             {navLinks.map((link) => (
-              <Link
-                key={link.name}
-                href={link.href}
-                onClick={() => setIsOpen(false)}
-                className="block px-4 py-3 rounded-lg text-base font-medium hover:bg-purple-600 transition-all duration-300"
-              >
-                {link.name}
-              </Link>
+              link.isPhone ? (
+                <a
+                  key={link.name}
+                  href={link.href}
+                  onClick={(e) => {
+                    handleCallClick(e, '0565265233');
+                    setIsOpen(false);
+                  }}
+                  className="block px-4 py-3 rounded-lg text-base font-medium hover:bg-purple-600 transition-all duration-300"
+                  aria-label="اتصل بنا الآن للحصول على خدمة نقل عفش محترفة"
+                >
+                  {link.name}
+                </a>
+              ) : (
+                <Link
+                  key={link.name}
+                  href={link.href}
+                  onClick={() => setIsOpen(false)}
+                  className="block px-4 py-3 rounded-lg text-base font-medium hover:bg-purple-600 transition-all duration-300"
+                >
+                  {link.name}
+                </Link>
+              )
             ))}
           </div>
         </div>

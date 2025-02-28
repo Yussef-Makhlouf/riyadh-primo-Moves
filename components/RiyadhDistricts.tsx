@@ -1,5 +1,9 @@
-import { MapPin, CheckCircle, ArrowRight, Phone,  } from 'lucide-react'
+'use client'
+
+import { MapPin, CheckCircle, ArrowRight, Phone } from 'lucide-react'
 import Link from 'next/link'
+
+declare const gtag_report_conversion: (url: string) => void;
 
 const districts = [
   {
@@ -29,6 +33,14 @@ const districts = [
 ]
 
 const RiyadhDistricts = () => {
+  const handleCallClick = (e: React.MouseEvent<HTMLAnchorElement>, phoneNumber: string) => {
+    e.preventDefault();
+    if (typeof gtag_report_conversion === 'function') {
+      gtag_report_conversion(`tel:${phoneNumber}`);
+    }
+    window.location.href = `tel:${phoneNumber}`;
+  };
+
   return (
     <section className="py-24 bg-gradient-to-br from-purple-50 via-white to-indigo-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -64,14 +76,16 @@ const RiyadhDistricts = () => {
                   </div>
                 ))}
               </div>
-               <Link 
-                 href="tel:0565265233"
+               <a 
+                 href="tel:0563009155"
+                 onClick={(e) => handleCallClick(e, '0563009155')}
                  className="mt-6 w-full bg-gradient-to-r from-purple-600 to-indigo-600 text-white py-3 px-6 rounded-xl hover:from-purple-700 hover:to-indigo-700 transition-all duration-300 flex items-center justify-center group"
+                 aria-label={`احجز خدمة نقل العفش في ${district.name}`}
                >
                  <Phone className="h-5 w-5 ml-2" />
                  احجز خدمة نقل العفش
                  <ArrowRight className="h-5 w-5 mr-2 transform group-hover:translate-x-1 transition-transform" />
-               </Link>
+               </a>
              </div>
            ))}
         </div>

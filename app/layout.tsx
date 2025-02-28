@@ -2,6 +2,7 @@ import FloatingButtons from '@/components/FloatingButtons'
 import './globals.css'
 import type { Metadata } from 'next'
 import { Tajawal } from 'next/font/google'
+import Script from 'next/script'
 
 const tajawal = Tajawal({ subsets: ['arabic'], weight: ['400', '700'] })
 
@@ -17,14 +18,29 @@ export const metadata: Metadata = {
     'تغليف اثاث',
     'نقل عفش شمال الرياض',
     'نقل عفش شرق الرياض',
-    'نقل عفش غرب الرياض',
+    'نقل عفش غرب الرياض', 
     'نقل عفش جنوب الرياض',
     'شركة نقل اثاث بالرياض',
     'افضل شركة نقل عفش',
     'نقل عفش رخيص',
     'سيارات نقل عفش',
     'دينا نقل عفش',
-    'ونيت نقل عفش'
+    'ونيت نقل عفش',
+    'افضل شركة نقل عفش في الرياض',
+    'افضل شركة نقل عفش الرياض',
+    'افضل شركة نقل عفش بالرياض',
+    'افضل شركة نقل اثاث',
+    'أفضل شركات نقل الاثاث',
+    'نقل عفش بالرياض رخيص',
+    'شركة نقل عفش بالرياض رخيصة',
+    'نقل عفش بالرياض حراج',
+    'نقل عفش بالرياض السويدي',
+    'نقل عفش بالرياض وخارج الرياض',
+    'نقل عفش بالرياض نقل اثاث بالرياض',
+    'شركة نقل عفش بالرياض نقل اثاث بالرياض',
+    'دينا نقل عفش بالرياض نقل اثاث بالرياض',
+    'نقل عفش بالرياض نقل اثاث',
+    'نقل عفش بالرياض نقل اثاث بالرياض وخارج الرياض الازدهار'
   ],
   authors: [{ name: 'نقل عفش الرياض' }],
   creator: 'نقل عفش الرياض',
@@ -37,7 +53,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'نقل عفش الرياض | خدمات نقل الأثاث الاحترافية',
     description: 'شركة متخصصة في نقل العفش والأثاث في الرياض. خدمات نقل سريعة وآمنة مع ضمان سلامة ممتلكاتك',
-    url: 'https://yourwebsite.com',
+    url: 'https://primomoves.com',
     siteName: 'نقل عفش الرياض',
     images: [
       {
@@ -65,7 +81,7 @@ export const metadata: Metadata = {
     google: 'your-google-verification-code',
   },
   alternates: {
-    canonical: 'https://yourwebsite.com',
+    canonical: 'https://primomoves.com',
   },
   category: 'خدمات نقل الأثاث',
 }
@@ -76,6 +92,36 @@ export default function RootLayout({
 }) {
   return (
     <html lang="ar" dir="rtl">
+      <head>
+        {/* Google tag (gtag.js) */}
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=AW-16595993654"
+          strategy="afterInteractive"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'AW-16595993654');
+
+            function gtag_report_conversion(url) {
+              var callback = function () {
+                if (typeof(url) != 'undefined') {
+                  window.location = url;
+                }
+              };
+              gtag('event', 'conversion', {
+                'send_to': 'AW-16595993654/kWc4CMLDtqIaELaIy-k9',
+                'value': 1.0,
+                'currency': 'EGP',
+                'event_callback': callback
+              });
+              return false;
+            }
+          `}
+        </Script>
+      </head>
       <body className={tajawal.className}>
         {children}
         <FloatingButtons />
