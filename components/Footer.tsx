@@ -43,7 +43,7 @@ const Footer = () => {
               ].map((link) => (
                 <li key={link}>
                   <Link 
-                    href="#" 
+                    href="/blog" 
                     className="text-purple-200 hover:text-white transition-colors hover:translate-x-2 inline-block"
                   >
                     {link}
