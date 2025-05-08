@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import { Phone, Mail, MapPin } from 'lucide-react'
+import { Phone, Mail, MapPin, Send } from 'lucide-react'
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -26,34 +26,62 @@ const Contact = () => {
   }
 
   return (
-    <section id="contact" className="py-20 bg-gray-50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="contact" className="relative py-20 bg-white overflow-hidden">
+      {/* Decorative Elements */}
+      <div className="absolute inset-0 bg-[url('/images/arabic-pattern.png')] opacity-[0.02] pointer-events-none"></div>
+      <div className="absolute top-0 left-0 w-1/3 h-1/3 bg-gradient-to-br from-[#c19a5b]/5 to-transparent"></div>
+      <div className="absolute bottom-0 right-0 w-1/3 h-1/3 bg-gradient-to-tl from-[#c19a5b]/5 to-transparent"></div>
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
         <div className="text-center">
-          <h2 className="text-3xl font-extrabold text-gray-900 sm:text-4xl">تواصل معنا</h2>
-          <p className="mt-4 text-xl text-gray-600">نحن هنا لمساعدتك في نقل عفشك بكل سهولة</p>
+          <h2 className="text-4xl font-extrabold bg-gradient-to-r from-[#c19a5b] to-[#8b6b3d] bg-clip-text text-transparent">
+            تواصل معنا
+          </h2>
+          <p className="mt-4 text-xl text-gray-700 max-w-2xl mx-auto">
+            نحن هنا لمساعدتك في نقل عفشك بكل سهولة وأمان. تواصل معنا الآن للحصول على أفضل الخدمات
+          </p>
         </div>
+
         <div className="mt-20 grid grid-cols-1 gap-10 lg:grid-cols-2">
-          <div className="bg-white rounded-lg shadow-lg p-8">
-            <h3 className="text-2xl font-bold text-gray-900 mb-6">معلومات الاتصال</h3>
-            <div className="space-y-6">
-              <div className="flex items-center">
-                <Phone className="h-6 w-6 text-amber-500 ml-4" />
-                <span className="text-lg text-gray-700">0500000000</span>
+          {/* Contact Information */}
+          <div className="bg-gray-50 rounded-2xl shadow-lg p-8 border border-[#c19a5b]/10 hover:border-[#c19a5b]/20 transition-all duration-300">
+            <h3 className="text-2xl font-bold text-gray-900 mb-8">معلومات الاتصال</h3>
+            <div className="space-y-8">
+              <div className="flex items-center group">
+                <div className="bg-[#c19a5b]/10 p-3 rounded-full ml-4 group-hover:bg-[#c19a5b]/20 transition-all duration-300">
+                  <Phone className="h-6 w-6 text-[#c19a5b]" />
+                </div>
+                <div>
+                  <p className="text-sm text-gray-500">اتصل بنا</p>
+                  <p className="text-lg font-medium text-gray-900">0500000000</p>
+                </div>
               </div>
-              <div className="flex items-center">
-                <Mail className="h-6 w-6 text-amber-500 ml-4" />
-                <span className="text-lg text-gray-700">info@riyadhmovers.com</span>
+              <div className="flex items-center group">
+                <div className="bg-[#c19a5b]/10 p-3 rounded-full ml-4 group-hover:bg-[#c19a5b]/20 transition-all duration-300">
+                  <Mail className="h-6 w-6 text-[#c19a5b]" />
+                </div>
+                <div>
+                  <p className="text-sm text-gray-500">البريد الإلكتروني</p>
+                  <p className="text-lg font-medium text-gray-900">info@riyadhmovers.com</p>
+                </div>
               </div>
-              <div className="flex items-center">
-                <MapPin className="h-6 w-6 text-amber-500 ml-4" />
-                <span className="text-lg text-gray-700">الرياض، المملكة العربية السعودية</span>
+              <div className="flex items-center group">
+                <div className="bg-[#c19a5b]/10 p-3 rounded-full ml-4 group-hover:bg-[#c19a5b]/20 transition-all duration-300">
+                  <MapPin className="h-6 w-6 text-[#c19a5b]" />
+                </div>
+                <div>
+                  <p className="text-sm text-gray-500">العنوان</p>
+                  <p className="text-lg font-medium text-gray-900">الرياض، المملكة العربية السعودية</p>
+                </div>
               </div>
             </div>
           </div>
-          <div className="bg-white rounded-lg shadow-lg p-8">
+
+          {/* Contact Form */}
+          <div className="bg-gray-50 rounded-2xl shadow-lg p-8 border border-[#c19a5b]/10 hover:border-[#c19a5b]/20 transition-all duration-300">
             <form onSubmit={handleSubmit} className="space-y-6">
               <div>
-                <label htmlFor="name" className="block text-sm font-medium text-gray-700">الاسم</label>
+                <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">الاسم</label>
                 <input
                   type="text"
                   id="name"
@@ -61,11 +89,12 @@ const Contact = () => {
                   value={formData.name}
                   onChange={handleChange}
                   required
-                  className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-amber-500 focus:border-amber-500"
+                  className="block w-full border border-gray-200 rounded-xl shadow-sm py-3 px-4 focus:outline-none focus:ring-2 focus:ring-[#c19a5b] focus:border-transparent transition-all duration-300"
+                  placeholder="أدخل اسمك الكامل"
                 />
               </div>
               <div>
-                <label htmlFor="email" className="block text-sm font-medium text-gray-700">البريد الإلكتروني</label>
+                <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">البريد الإلكتروني</label>
                 <input
                   type="email"
                   id="email"
@@ -73,11 +102,12 @@ const Contact = () => {
                   value={formData.email}
                   onChange={handleChange}
                   required
-                  className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-amber-500 focus:border-amber-500"
+                  className="block w-full border border-gray-200 rounded-xl shadow-sm py-3 px-4 focus:outline-none focus:ring-2 focus:ring-[#c19a5b] focus:border-transparent transition-all duration-300"
+                  placeholder="أدخل بريدك الإلكتروني"
                 />
               </div>
               <div>
-                <label htmlFor="phone" className="block text-sm font-medium text-gray-700">رقم الهاتف</label>
+                <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-2">رقم الهاتف</label>
                 <input
                   type="tel"
                   id="phone"
@@ -85,11 +115,12 @@ const Contact = () => {
                   value={formData.phone}
                   onChange={handleChange}
                   required
-                  className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-amber-500 focus:border-amber-500"
+                  className="block w-full border border-gray-200 rounded-xl shadow-sm py-3 px-4 focus:outline-none focus:ring-2 focus:ring-[#c19a5b] focus:border-transparent transition-all duration-300"
+                  placeholder="أدخل رقم هاتفك"
                 />
               </div>
               <div>
-                <label htmlFor="message" className="block text-sm font-medium text-gray-700">الرسالة</label>
+                <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-2">الرسالة</label>
                 <textarea
                   id="message"
                   name="message"
@@ -97,14 +128,16 @@ const Contact = () => {
                   value={formData.message}
                   onChange={handleChange}
                   required
-                  className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-amber-500 focus:border-amber-500"
+                  className="block w-full border border-gray-200 rounded-xl shadow-sm py-3 px-4 focus:outline-none focus:ring-2 focus:ring-[#c19a5b] focus:border-transparent transition-all duration-300"
+                  placeholder="اكتب رسالتك هنا..."
                 ></textarea>
               </div>
               <div>
                 <button
                   type="submit"
-                  className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-amber-600 hover:bg-amber-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-amber-500"
+                  className="w-full flex justify-center items-center gap-2 py-3 px-6 border border-transparent rounded-xl shadow-sm text-base font-medium text-white bg-[#c19a5b] hover:bg-[#8b6b3d] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#c19a5b] transition-all duration-300"
                 >
+                  <Send className="h-5 w-5" />
                   إرسال الرسالة
                 </button>
               </div>

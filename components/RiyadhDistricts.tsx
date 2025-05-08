@@ -1,7 +1,6 @@
 'use client'
 
-import { MapPin, CheckCircle, ArrowRight, Phone } from 'lucide-react'
-
+import { MapPin, CheckCircle, ArrowLeft, Phone } from 'lucide-react'
 
 declare const gtag_report_conversion: (url: string) => void;
 
@@ -42,10 +41,21 @@ const RiyadhDistricts = () => {
   };
 
   return (
-    <section className="py-24 bg-gradient-to-br from-purple-50 via-white to-indigo-50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section className="py-24 bg-white relative overflow-hidden">
+      {/* Decorative Elements */}
+      <div className="absolute inset-0 bg-[url('/images/arabic-pattern.png')] opacity-[0.02] pointer-events-none"></div>
+      <div className="absolute top-0 left-0 w-1/3 h-1/3 bg-gradient-to-br from-[#c19a5b]/5 to-transparent"></div>
+      <div className="absolute bottom-0 right-0 w-1/3 h-1/3 bg-gradient-to-tl from-[#c19a5b]/5 to-transparent"></div>
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
         <div className="text-center">
-          <h2 className="text-4xl font-extrabold text-gray-900 mb-6">خدماتنا في أحياء الرياض</h2>
+          <span className="inline-flex items-center px-4 py-2 rounded-full bg-[#c19a5b]/10 mb-6 border border-[#c19a5b]/20">
+            <MapPin className="h-5 w-5 text-[#c19a5b] ml-2" />
+            <span className="text-[#c19a5b] font-medium">خدماتنا في أحياء الرياض</span>
+          </span>
+          <h2 className="text-4xl font-extrabold bg-gradient-to-r from-[#c19a5b] to-[#8b6b3d] bg-clip-text text-transparent mb-6">
+            نخدم جميع أحياء الرياض
+          </h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto mb-16">
             نقدم خدمات نقل العفش المتكاملة في جميع أحياء الرياض بأعلى معايير الجودة وأفضل الأسعار
           </p>
@@ -55,13 +65,13 @@ const RiyadhDistricts = () => {
           {districts.map((district) => (
             <div 
               key={district.name} 
-              className="bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 p-8 border border-purple-100"
+              className="bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 p-8 border border-[#c19a5b]/10"
             >
               <div className="flex items-center mb-4">
-                <MapPin className="h-6 w-6 text-purple-600 ml-2" />
+                <MapPin className="h-6 w-6 text-[#c19a5b] ml-2" />
                 <div>
                   <h3 className="text-xl font-bold text-gray-900">{district.name}</h3>
-                  <p className="text-sm text-purple-600">{district.location}</p>
+                  <p className="text-sm text-[#c19a5b]">{district.location}</p>
                 </div>
               </div>
               
@@ -70,24 +80,23 @@ const RiyadhDistricts = () => {
               <div className="space-y-3">
                 {district.services.map((service) => (
                   <div key={service} className="flex items-center text-gray-700">
-                    <CheckCircle className="h-5 w-5 text-purple-500 ml-2" />
+                    <CheckCircle className="h-5 w-5 text-[#c19a5b] ml-2" />
                     <span>{service}</span>
-                    
                   </div>
                 ))}
               </div>
-               <a 
-                 href="tel:0563009155"
-                 onClick={(e) => handleCallClick(e, '0563009155')}
-                 className="mt-6 w-full bg-gradient-to-r from-purple-600 to-indigo-600 text-white py-3 px-6 rounded-xl hover:from-purple-700 hover:to-indigo-700 transition-all duration-300 flex items-center justify-center group"
-                 aria-label={`احجز خدمة نقل العفش في ${district.name}`}
-               >
-                 <Phone className="h-5 w-5 ml-2" />
-                 احجز خدمة نقل العفش
-                 <ArrowRight className="h-5 w-5 mr-2 transform group-hover:translate-x-1 transition-transform" />
-               </a>
-             </div>
-           ))}
+              <a 
+                href="tel:0563009155"
+                onClick={(e) => handleCallClick(e, '0563009155')}
+                className="mt-6 w-full bg-[#c19a5b] text-white py-3 px-6 rounded-xl hover:bg-[#8b6b3d] transition-all duration-300 flex items-center justify-center group"
+                aria-label={`احجز خدمة نقل العفش في ${district.name}`}
+              >
+                <Phone className="h-5 w-5 ml-2" />
+                احجز خدمة نقل العفش
+                <ArrowLeft className="h-5 w-5 mr-2 transform group-hover:translate-x-1 transition-transform" />
+              </a>
+            </div>
+          ))}
         </div>
       </div>
     </section>

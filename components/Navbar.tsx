@@ -1,121 +1,107 @@
 'use client'
 
-import { useState } from 'react'
-import { Menu, X } from 'lucide-react'
+import { useState, useEffect } from 'react'
 import Link from 'next/link'
-import Image from 'next/image'
-
-declare const gtag_report_conversion: (url: string) => void;
+import { Menu, X, Phone } from 'lucide-react'
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false)
+  const [isScrolled, setIsScrolled] = useState(false)
 
-  const handleCallClick = (e: React.MouseEvent<HTMLAnchorElement>, phoneNumber: string) => {
-    e.preventDefault();
-    if (typeof gtag_report_conversion === 'function') {
-      gtag_report_conversion(`tel:${phoneNumber}`);
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 10)
     }
-    window.location.href = `tel:${phoneNumber}`;
-  };
+
+    window.addEventListener('scroll', handleScroll)
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
 
   const navLinks = [
     { name: 'الرئيسية', href: '/' },
-    { name: 'خدمات النقل', href: '#services' },
-    { name: 'عن الشركة', href: '#about' },
-    { 
-      name: 'تواصل معنا', 
-      href: 'tel:0543757997',
-      isPhone: true 
-    }
+    { name: 'خدماتنا', href: '/services' },
+    { name: 'من نحن', href: '/about' },
+
   ]
 
   return (
-    <nav className="bg-gradient-to-r from-purple-700 to-indigo-800 text-white sticky top-0 z-50">
+    <nav className={`fixed w-full z-50 transition-all duration-300 ${
+      isScrolled ? 'bg-white shadow-lg' : 'bg-transparent'
+    }`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16 md:h-20">
-          {/* Logo Section */}
-          <div className="flex-shrink-0">
-            <Link href="/" className="flex items-center space-x-2">
-              <Image 
-                src="/01.png" 
-                alt="نقل عفش الرياض" 
-                width={48}
-                height={48}
-                className="rounded-full"
-              />
-              <h1 className="font-bold text-lg md:text-xl mr-2">نقل عفش الرياض</h1>
-            </Link>
-          </div>
+        <div className="flex justify-between items-center h-20">
+          {/* Logo */}
+          <Link href="/" className="flex items-center">
+            <span className="text-2xl font-bold bg-gradient-to-r from-[#c19a5b] to-[#8b6b3d] bg-clip-text text-transparent">
+              نقل عفش الرياض
+            </span>
+          </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-4">
+          <div className="hidden md:flex items-center space-x-8 rtl:space-x-reverse">
             {navLinks.map((link) => (
-              link.isPhone ? (
-                <a
-                  key={link.name}
-                  href={link.href}
-                  onClick={(e) => handleCallClick(e, '0543757997')}
-                  className="px-4 py-2 rounded-full text-sm font-medium hover:bg-purple-600 transition-all duration-300 hover:shadow-lg"
-                  aria-label="اتصل بنا الآن للحصول على خدمة نقل عفش محترفة"
-                >
-                  {link.name}
-                </a>
-              ) : (
-                <Link
-                  key={link.name}
-                  href={link.href}
-                  className="px-4 py-2 rounded-full text-sm font-medium hover:bg-purple-600 transition-all duration-300 hover:shadow-lg"
-                >
-                  {link.name}
-                </Link>
-              )
+              <Link
+                key={link.name}
+                href={link.href}
+                className="text-gray-700 hover:text-[#c19a5b] transition-colors"
+              >
+                {link.name}
+              </Link>
             ))}
+            <a
+              href="tel:0563009155"
+              className="inline-flex items-center px-4 py-2 border border-transparent text-base font-medium rounded-full text-white bg-[#c19a5b] hover:bg-[#8b6b3d] transition-colors"
+            >
+              <Phone className="h-5 w-5 ml-2" />
+              اتصل بنا
+            </a>
           </div>
 
-          {/* Mobile Menu Button */}
+          {/* Mobile menu button */}
           <div className="md:hidden">
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className="p-2 rounded-lg hover:bg-purple-600 transition-colors"
+              className="inline-flex items-center justify-center p-2 rounded-md text-gray-700 hover:text-[#c19a5b] focus:outline-none"
             >
-              {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+              {isOpen ? (
+                <X className="h-6 w-6" />
+              ) : (
+                <Menu className="h-6 w-6" />
+              )}
             </button>
           </div>
         </div>
       </div>
 
-      {/* Mobile Navigation */}
-      {isOpen && (
-        <div className="md:hidden absolute w-full bg-purple-700 shadow-xl">
-          <div className="px-2 pt-2 pb-3 space-y-1">
-            {navLinks.map((link) => (
-              link.isPhone ? (
-                <a
-                  key={link.name}
-                  href={link.href}
-                  onClick={(e) => {
-                    handleCallClick(e, '0565265233');
-                    setIsOpen(false);
-                  }}
-                  className="block px-4 py-3 rounded-lg text-base font-medium hover:bg-purple-600 transition-all duration-300"
-                  aria-label="اتصل بنا الآن للحصول على خدمة نقل عفش محترفة"
-                >
-                  {link.name}
-                </a>
-              ) : (
-                <Link
-                  key={link.name}
-                  href={link.href}
-                  onClick={() => setIsOpen(false)}
-                  className="block px-4 py-3 rounded-lg text-base font-medium hover:bg-purple-600 transition-all duration-300"
-                >
-                  {link.name}
-                </Link>
-              )
-            ))}
-          </div>
+      {/* Mobile menu */}
+      <div
+        className={`md:hidden transition-all duration-300 ease-in-out ${
+          isOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
+        } overflow-hidden bg-white shadow-lg`}
+      >
+        <div className="px-2 pt-2 pb-3 space-y-1">
+          {navLinks.map((link) => (
+            <Link
+              key={link.name}
+              href={link.href}
+              className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-[#c19a5b] hover:bg-gray-50"
+              onClick={() => setIsOpen(false)}
+            >
+              {link.name}
+            </Link>
+          ))}
+          <a
+            href="tel:0563009155"
+            className="block px-3 py-2 rounded-md text-base font-medium text-white bg-[#c19a5b] hover:bg-[#8b6b3d]"
+            onClick={() => setIsOpen(false)}
+          >
+            <div className="flex items-center">
+              <Phone className="h-5 w-5 ml-2" />
+              اتصل بنا
+            </div>
+          </a>
         </div>
-      )}
+      </div>
     </nav>
   )
 }

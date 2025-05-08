@@ -1,19 +1,18 @@
 import About from "@/components/About";
 import FAQ from "@/components/FAQ";
+import FeaturedBlogs from "@/components/FeaturedBlogs";
 import Footer from "@/components/Footer";
 import Hero from "@/components/Hero";
 import Navbar from "@/components/Navbar";
 import RiyadhDistricts from "@/components/RiyadhDistricts";
-import ServiceCardsWithImages from "@/components/ServiceCardsWithImages";
 import Services from "@/components/Services";
 import WhyChooseUs from "@/components/WhyChooseUs";
 import { Contact } from "lucide-react";
 import { Metadata } from "next";
-import { servicesData, districtsData, faqData } from "@/lib/data";
-import HomeBlogSection from "@/components/home/HomeBlogSection";
+
 
 export const metadata: Metadata = {
-  title: "بريمو موفز - خدمات نقل أثاث متميزة في الرياض",
+  title: "رياض بريمو - خدمات نقل أثاث متميزة في الرياض",
   description: "خدمات نقل احترافية في الرياض. خدمات نقل متميزة للمنازل والمكاتب. احصل على عرض سعر مجاني اليوم!",
   keywords: [
     'نقل عفش الرياض',
@@ -50,22 +49,22 @@ export const metadata: Metadata = {
   ],
   robots: "index, follow",
   openGraph: {
-    title: "بريمو موفز",
+    title: "رياض بريمو",
     description: "خدمات نقل احترافية في الرياض",
     url: "https://primomoves.com",
-    siteName: "بريمو موفز",
+    siteName: "رياض بريمو",
     images: [
       {
         url: "/og-image.jpg",
         width: 1200,
         height: 630,
-        alt: "شعار بريمو موفز"
+        alt: "شعار رياض بريمو"
       }
     ]
   },
   twitter: {
     card: "summary_large_image",
-    title: "بريمو موفز",
+    title: "رياض بريمو",
     description: "خدمات نقل احترافية في الرياض",
     images: ["/og-image.jpg"]
   }
@@ -77,11 +76,12 @@ export default function Home() {
       <Navbar />
       <Hero />
       <About />
-      <HomeBlogSection />
-      <ServiceCardsWithImages data={servicesData} />
+
+      {/* <ServiceCardsWithImages data={servicesData} /> */}
       <RiyadhDistricts />
       <WhyChooseUs />
       <Services />
+      <FeaturedBlogs />
       <FAQ />
       <Contact />
       <Footer />

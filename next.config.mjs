@@ -1,32 +1,32 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  reactStrictMode: true,
   output: 'export',
+  swcMinify: true,
   images: {
     unoptimized: true,
   },
-  trailingSlash: true,
-  output: 'export',
-  ignoreDuringBuilds: true,
   eslint: {
     ignoreDuringBuilds: true,
   },
   typescript: {
     ignoreBuildErrors: true,
   },
-  // Exclude tag pages from static generation
-  exportPathMap: async function (
-    defaultPathMap,
-    { dev, dir, outDir, distDir, buildId }
-  ) {
-    // Filter out tag pages from the default path map
-    const filteredPaths = {};
-    for (const [path, page] of Object.entries(defaultPathMap)) {
-      if (!path.startsWith('/blog/tag/')) {
-        filteredPaths[path] = page;
-      }
-    }
-    return filteredPaths;
+  webpack: (config) => {
+    config.module.rules.push({
+      test: /\.(avif)$/i,
+      type: 'asset/resource',
+    });
+    return config;
   },
+  transpilePackages: ['framer-motion'],
+  modularizeImports: {
+    'framer-motion': {
+      transform: 'framer-motion/{{member}}',
+    },
+  },
+  basePath: '',
+  assetPrefix: '',
 }
 
 export default nextConfig

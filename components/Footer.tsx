@@ -1,96 +1,125 @@
-import { Facebook, Twitter, Instagram, Mail, Phone, MapPin } from 'lucide-react'
 import Link from 'next/link'
+import { Phone, Mail, MapPin, Facebook, Twitter, Instagram, Youtube } from 'lucide-react'
 
 const Footer = () => {
+  const currentYear = new Date().getFullYear()
+
   return (
-    <footer className="bg-gradient-to-br from-purple-900 via-indigo-900 to-purple-900 text-white">
-      <div className="max-w-7xl mx-auto pt-16 pb-8 px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
+    <footer className="bg-white relative overflow-hidden">
+      {/* Decorative Elements */}
+      <div className="absolute inset-0 bg-[url('/images/arabic-pattern.png')] opacity-[0.02] pointer-events-none"></div>
+      <div className="absolute top-0 left-0 w-1/3 h-1/3 bg-gradient-to-br from-[#c19a5b]/5 to-transparent"></div>
+      <div className="absolute bottom-0 right-0 w-1/3 h-1/3 bg-gradient-to-tl from-[#c19a5b]/5 to-transparent"></div>
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+        {/* Main Footer Content */}
+        <div className="py-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {/* Company Info */}
-          <div>
-            <h3 className="text-2xl font-bold mb-6">نقل عفش الرياض | بريمو موفرز</h3>
-            <p className="text-purple-200 leading-relaxed mb-6">
-              خدمات نقل احترافية في جميع أنحاء الرياض والمناطق المجاورة. نضمن سلامة ممتلكاتك مع أفضل الأسعار.
+          <div className="space-y-6">
+            <h3 className="text-2xl font-bold text-[#c19a5b]">شركة نقل عفش الرياض</h3>
+            <p className="text-gray-600 leading-relaxed">
+              نقدم خدمات نقل العفش المنزلي والمكتبي في الرياض بأعلى معايير الجودة والاحترافية
             </p>
-            <div className="flex space-x-4">
-              {[
-                { icon: Facebook, href: '#' },
-                { icon: Twitter, href: '#' },
-                { icon: Instagram, href: '#' }
-              ].map((social, index) => (
-                <Link 
-                  key={index}
-                  href={social.href}
-                  className="w-10 h-10 rounded-full bg-purple-800 flex items-center justify-center hover:bg-purple-700 transition-colors"
-                >
-                  <social.icon className="h-5 w-5" />
-                </Link>
-              ))}
+            <div className="flex space-x-4 rtl:space-x-reverse">
+              <a href="https://www.facebook.com/profile.php?id=61574108861445" className="text-gray-400 hover:text-[#c19a5b] transition-colors">
+                <Facebook className="h-6 w-6" />
+              </a>
+           
+              <a href="https://www.instagram.com/riaydh_ads?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" className="text-gray-400 hover:text-[#c19a5b] transition-colors">
+                <Instagram className="h-6 w-6" />
+              </a>
+            
             </div>
           </div>
 
           {/* Quick Links */}
           <div>
-            <h3 className="text-xl font-semibold mb-6">روابط سريعة</h3>
+            <h4 className="text-lg font-semibold text-gray-900 mb-6">روابط سريعة</h4>
             <ul className="space-y-4">
-              {[
-                'الرئيسية',
-                'خدماتنا',
-                'عن الشركة',
-                'اتصل بنا',
-                'الأسعار',
-                'المدونة'
-              ].map((link) => (
-                <li key={link}>
-                  <Link 
-                    href="/blog" 
-                    className="text-purple-200 hover:text-white transition-colors hover:translate-x-2 inline-block"
-                  >
-                    {link}
-                  </Link>
-                </li>
-              ))}
+              <li>
+                <Link href="/" className="text-gray-600 hover:text-[#c19a5b] transition-colors">
+                  الرئيسية
+                </Link>
+              </li>
+              <li>
+                <Link href="/services" className="text-gray-600 hover:text-[#c19a5b] transition-colors">
+                  خدماتنا
+                </Link>
+              </li>
+              <li>
+                <Link href="/#about" className="text-gray-600 hover:text-[#c19a5b] transition-colors">
+                  من نحن
+                </Link>
+              </li>
+              <li>
+                <Link href="tel:0563009155" className="text-gray-600 hover:text-[#c19a5b] transition-colors">
+                  اتصل بنا
+                </Link>
+              </li>
+            </ul>
+          </div>
+
+          {/* Services */}
+          <div>
+            <h4 className="text-lg font-semibold text-gray-900 mb-6">خدماتنا</h4>
+            <ul className="space-y-4">
+              <li>
+                <Link href="/services/home-moving" className="text-gray-600 hover:text-[#c19a5b] transition-colors">
+                  نقل الأثاث المنزلي
+                </Link>
+              </li>
+              <li>
+                <Link href="/services/office-moving" className="text-gray-600 hover:text-[#c19a5b] transition-colors">
+                  نقل المكاتب
+                </Link>
+              </li>
+              <li>
+                <Link href="/services/packing" className="text-gray-600 hover:text-[#c19a5b] transition-colors">
+                  خدمات التغليف
+                </Link>
+              </li>
+              <li>
+                <Link href="/services/storage" className="text-gray-600 hover:text-[#c19a5b] transition-colors">
+                  خدمات التخزين
+                </Link>
+              </li>
             </ul>
           </div>
 
           {/* Contact Info */}
           <div>
-            <h3 className="text-xl font-semibold mb-6">معلومات التواصل</h3>
+            <h4 className="text-lg font-semibold text-gray-900 mb-6">تواصل معنا</h4>
             <ul className="space-y-4">
-              {[
-                { icon: Phone, text: '0565265233', href: 'tel:0565265233' },
-                { icon: Mail, text: 'info@example.com', href: 'mailto:info@example.com' },
-                { icon: MapPin, text: 'الرياض، المملكة العربية السعودية', href: '#' }
-              ].map((item, index) => (
-                <li key={index} className="flex items-center space-x-3">
-                  <item.icon className="h-5 w-5 text-purple-400" />
-                  <Link href={item.href} className="text-purple-200 hover:text-white mr-2">
-                    {item.text}
-                  </Link>
-                </li>
-              ))}
+              <li className="flex items-center text-gray-600">
+                <Phone className="h-5 w-5 text-[#c19a5b] ml-3" />
+                <span>0563009155</span>
+              </li>
+              <li className="flex items-center text-gray-600">
+                <Mail className="h-5 w-5 text-[#c19a5b] ml-3" />
+                <span>info@riyadhmovers.com</span>
+              </li>
+              <li className="flex items-center text-gray-600">
+                <MapPin className="h-5 w-5 text-[#c19a5b] ml-3" />
+                <span>الرياض، المملكة العربية السعودية</span>
+              </li>
             </ul>
-          </div>
-
-          {/* Fashne Digital Marketing */}
-          <div>
-            <h3 className="text-xl font-semibold mb-6">تطوير وتصميم</h3>
-            <Link 
-              href="https://fashne.net" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="inline-flex items-center space-x-2 bg-gradient-to-r from-purple-500 to-indigo-500 px-6 py-3 rounded-xl hover:from-purple-600 hover:to-indigo-600 transition-all duration-300"
-            >
-              <span className="mr-2">الفشني للتسويق الرقمي</span>
-              <span className="transform group-hover:translate-x-1">→</span>
-            </Link>
           </div>
         </div>
 
-        <div className="mt-16 pt-8 border-t border-purple-800">
+        {/* Bottom Bar */}
+        <div className="py-8 border-t border-gray-100">
           <div className="flex flex-col md:flex-row justify-between items-center">
-            <p className="text-purple-200">© 2024 نقل عفش الرياض بريمو موفرز. جميع الحقوق محفوظة</p>
-
+            <p className="text-gray-600 text-sm">
+              © {currentYear} شركة نقل عفش الرياض. جميع الحقوق محفوظة
+            </p>
+            <div className="flex space-x-6 rtl:space-x-reverse mt-4 md:mt-0">
+              <Link href="/privacy" className="text-gray-600 hover:text-[#c19a5b] text-sm transition-colors">
+                سياسة الخصوصية
+              </Link>
+              <Link href="/terms" className="text-gray-600 hover:text-[#c19a5b] text-sm transition-colors">
+                الشروط والأحكام
+              </Link>
+            </div>
           </div>
         </div>
       </div>

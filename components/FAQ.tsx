@@ -5,65 +5,99 @@ import { ChevronDown, ChevronUp } from 'lucide-react'
 
 const faqs = [
   {
-    question: "ما هي تكلفة نقل الأثاث في الرياض؟",
-    answer: "تختلف تكلفة نقل الأثاث حسب عدة عوامل مثل حجم المنزل، كمية الأثاث، والمسافة. نقدم تقييمًا مجانيًا لتزويدك بسعر دقيق."
+    question: 'ما هي الخدمات التي تقدمونها؟',
+    answer: 'نقدم مجموعة متكاملة من خدمات نقل العفش تشمل: نقل الأثاث المنزلي والمكتبي، فك وتركيب الأثاث، تغليف محترف، تخزين آمن، ونقل المكيفات. كل هذه الخدمات تتم بأيدي فنيين متخصصين وأدوات حديثة.'
   },
   {
-    question: "كم من الوقت تستغرق عملية نقل الأثاث؟",
-    answer: "تعتمد مدة النقل على حجم المنزل وكمية الأثاث. عادة ما تستغرق العملية من 4 إلى 8 ساعات للمنازل المتوسطة الحجم."
+    question: 'كيف يتم تحديد سعر خدمة النقل؟',
+    answer: 'يتم تحديد السعر بناءً على عدة عوامل: حجم المنقولات، المسافة، عدد القطع، نوع الخدمات المطلوبة (فك، تركيب، تغليف). نقدم عروض أسعار مجانية قبل بدء العمل.'
   },
   {
-    question: "هل تقدمون خدمات التغليف؟",
-    answer: "نعم، نقدم خدمات تغليف احترافية لجميع أنواع الأثاث والأغراض الشخصية لضمان سلامتها أثناء النقل."
+    question: 'هل تقدمون ضمان على سلامة المنقولات؟',
+    answer: 'نعم، نقدم ضمان شامل على جميع خدماتنا. جميع المنقولات مؤمنة ضد الأضرار، ونستخدم مواد تغليف عالية الجودة لحماية محتوياتك.'
   },
   {
-    question: "هل أنتم مؤمنون ومرخصون؟",
-    answer: "نعم، شركتنا مرخصة بالكامل ومؤمنة. نقدم أيضًا تأمينًا إضافيًا على الممتلكات أثناء النقل لراحة بالك."
+    question: 'كم تستغرق عملية النقل؟',
+    answer: 'تختلف مدة النقل حسب حجم المنقولات والمسافة. عادةً ما تستغرق عملية نقل شقة متوسطة من 4-6 ساعات. نلتزم بالمواعيد المحددة ونضمن سرعة إنجاز العمل.'
   },
   {
-    question: "هل تقدمون خدمات التخزين؟",
-    answer: "نعم، نوفر خدمات تخزين آمنة وقصيرة وطويلة الأجل في مستودعات مكيفة ومؤمنة."
+    question: 'هل تقدمون خدمة التخزين؟',
+    answer: 'نعم، نوفر مستودعات آمنة ومكيفة لتخزين الأثاث والممتلكات. المستودعات مجهزة بأحدث أنظمة الأمان والمراقبة.'
   },
   {
-    question: "كيف يمكنني حجز خدمة نقل الأثاث معكم؟",
-    answer: "يمكنك حجز خدمة النقل عن طريق الاتصال بنا أو ملء نموذج الطلب على موقعنا. سنقوم بالتواصل معك لتحديد موعد للمعاينة وتقديم عرض سعر."
+    question: 'كيف يمكنني حجز موعد للنقل؟',
+    answer: 'يمكنك التواصل معنا عبر الهاتف أو الواتساب أو من خلال نموذج الاتصال في موقعنا. نتوفر على مدار الساعة لخدمتك وتحديد الموعد المناسب.'
   }
 ]
 
 const FAQ = () => {
   const [openIndex, setOpenIndex] = useState<number | null>(null)
 
+  const toggleFAQ = (index: number) => {
+    setOpenIndex(openIndex === index ? null : index)
+  }
+
   return (
-    <section id="faq" className="py-20 bg-white">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center">
-          <h2 className="text-3xl font-extrabold text-gray-900 sm:text-4xl">الأسئلة الشائعة</h2>
-          <p className="mt-4 text-xl text-gray-600">إجابات على الأسئلة الأكثر شيوعًا حول خدماتنا</p>
+    <section className="py-24 bg-white relative overflow-hidden" id="faq">
+      {/* Decorative Elements */}
+      <div className="absolute inset-0 bg-[url('/images/arabic-pattern.png')] opacity-[0.02] pointer-events-none"></div>
+      <div className="absolute top-0 left-0 w-1/3 h-1/3 bg-gradient-to-br from-[#c19a5b]/5 to-transparent"></div>
+      <div className="absolute bottom-0 right-0 w-1/3 h-1/3 bg-gradient-to-tl from-[#c19a5b]/5 to-transparent"></div>
+
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+        <div className="text-center mb-16">
+          <h2 className="text-4xl font-extrabold bg-gradient-to-r from-[#c19a5b] to-[#8b6b3d] bg-clip-text text-transparent">
+            الأسئلة الشائعة
+          </h2>
+          <p className="mt-4 text-xl text-gray-700 max-w-2xl mx-auto">
+            إجابات على الأسئلة الأكثر شيوعاً حول خدماتنا
+          </p>
         </div>
-        <div className="mt-12 space-y-6">
+
+        <div className="space-y-4">
           {faqs.map((faq, index) => (
-            <div key={index} className="bg-gray-50 rounded-lg shadow-md overflow-hidden">
+            <div
+              key={index}
+              className="bg-gray-50 rounded-2xl border border-[#c19a5b]/10 hover:border-[#c19a5b]/20 transition-all duration-300"
+            >
               <button
-                className="w-full text-right px-6 py-4 focus:outline-none"
-                onClick={() => setOpenIndex(openIndex === index ? null : index)}
+                className="w-full px-6 py-4 text-right flex items-center justify-between focus:outline-none"
+                onClick={() => toggleFAQ(index)}
               >
-                <div className="flex items-center justify-between">
-                  <span className="font-medium text-lg text-gray-900">{faq.question}</span>
-                  {openIndex === index ? (
-                    <ChevronUp className="h-5 w-5 text-amber-500" />
-                  ) : (
-                    <ChevronDown className="h-5 w-5 text-amber-500" />
-                  )}
-                </div>
+                <span className="text-lg font-medium text-gray-900">{faq.question}</span>
+                {openIndex === index ? (
+                  <ChevronUp className="h-6 w-6 text-[#c19a5b]" />
+                ) : (
+                  <ChevronDown className="h-6 w-6 text-[#c19a5b]" />
+                )}
               </button>
               {openIndex === index && (
                 <div className="px-6 pb-4">
-                  <p className="text-gray-600">{faq.answer}</p>
+                  <p className="text-gray-600 leading-relaxed">{faq.answer}</p>
                 </div>
               )}
             </div>
           ))}
         </div>
+
+        {/* Schema.org structured data for FAQ */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "FAQPage",
+              "mainEntity": faqs.map(faq => ({
+                "@type": "Question",
+                "name": faq.question,
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": faq.answer
+                }
+              }))
+            })
+          }}
+        />
       </div>
     </section>
   )
